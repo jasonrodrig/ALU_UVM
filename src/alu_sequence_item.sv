@@ -31,18 +31,4 @@ class alu_sequence_item extends uvm_sequence_item;
 		super.new(name);
 	endfunction
 
-	constraint ce_distribution {
-		  rst == 0; ce == 1;
-//		rst dist{ 0:=10 , 1:=2};
-//		ce  dist{ 1:=10 , 0:=2};
-//		cmd dist{ 0:=2 , 9:=1 , 2:=2};
-	};
-	constraint input_range { inp_valid inside {[ 1 : 3]};};
-	constraint cmd_range { // mode == 1; inp_valid == 3;
-		                           if (mode)
-		                             cmd inside {[0:10]};
-		                           else
-		                             cmd inside {[0:13]}; 
-	};
-
 endclass

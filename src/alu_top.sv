@@ -44,7 +44,7 @@ module top;
 	end
 
 	initial begin 
-		run_test("alu_test");
+		run_test("alu_regression_test");
 		#1000 $finish;
 	end
 endmodule
