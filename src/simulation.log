@@ -1,5 +1,5 @@
-# vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll alu_coverage.ucdb; run -all; exit" 
-# Start time: 17:18:01 on Aug 17,2025
+# vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
+# Start time: 16:45:04 on Aug 18,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
@@ -22,11 +22,12 @@
 # Loading work.alu_top_sv_unit(fast)
 # Loading work.top(fast)
 # Loading work.alu_interface(fast)
+# Loading work.alu_assertions(fast)
 # Loading work.alu_design(fast)
 # Loading mtiUvm.questa_uvm_pkg(fast)
 # Loading /tools/mentor/questasim_10.6c/questasim/uvm-1.1d/linux/uvm_dpi.so
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
-# coverage save -onexit -assert -directive -cvg -codeAll alu_coverage.ucdb
+# coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb
 #  run -all
 # ----------------------------------------------------------------
 # UVM-1.1d
@@ -80,287 +81,632 @@
 # -----------------------------------------------------------------
 # 
 # Driver @ 0 
-#  RST = 1 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 
+#  RST = 1 | CE = 1 | MODE = 1 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 5 ns Started: 5 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS ARE UNKNOWN : x x   x   x x x  x x
+#    Time: 5 ns Started: 5 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 25 Expr: ~$isunknown({rst,ce,opa,opb,mode,inp_valid,cmd,cin})
+# ** Info: OUTPUTS ARE LATCHED :     0 0 0 0 0 0 0
+#    Time: 15 ns Started: 15 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS TRIGGERED
+#    Time: 15 ns Started: 15 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 28
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 15 ns Started: 15 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 25 
-#  RST = 1 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 |
+#  RST = 1 | CE = 1 | MODE = 1 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 |
 # Monitor @ 25 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 25 
-#  RST = 1 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 
+#  RST = 1 | CE = 1 | MODE = 1 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA =  93 | OPB =  99 
 #  time =                   25 | reference_results_stored = 0000000000000000000000
 # time :                   25 | monitor_results_stored = 0000000000000000000000
 # <-----------------------------PASS----------------------------->
-#  count =           1 
 # Driver @ 25 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 1 | CIN = 1 | OPA = 233 | OPB = 150 
-#  count =           2 
-# Driver @ 55 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =  36 | OPB = 187 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  6 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 25 ns Started: 25 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS TRIGGERED
+#    Time: 25 ns Started: 25 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 28
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 25 ns Started: 25 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 35 ns Started: 35 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 35 ns Started: 35 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 35 ns Started: 35 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 45 ns Started: 45 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 45 ns Started: 45 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 45 ns Started: 45 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# SENDING RESPONSE 
 # Monitor @ 55 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 1 | CIN = 1 | OPA = 233 | OPB = 150 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  6 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 |
 # Monitor @ 55 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+#  RES =    54 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 55 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =  36 | OPB = 187 
-#  time =                   55 | reference_results_stored = 0000000000100001000001
-# time :                   55 | monitor_results_stored = 0000000000000000000001
-# <-----------------------------FAIL----------------------------->
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  6 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 
+#  time =                   55 | reference_results_stored = 0000000000110110000000
+# time :                   55 | monitor_results_stored = 0000000000110110000000
+# <-----------------------------PASS----------------------------->
+# Driver @ 55 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 
+# ** Info: OUTPUTS ARE LATCHED :    54 0 0 0 0 0 0
+#    Time: 55 ns Started: 55 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 55 ns Started: 55 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 55 ns Started: 55 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 65 ns Started: 65 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 65 ns Started: 65 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 65 ns Started: 65 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 75 ns Started: 75 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 75 ns Started: 75 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 75 ns Started: 75 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 85 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =  36 | OPB = 187 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 |
 # Monitor @ 85 
-#  RES =    33 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+#  RES =    75 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 85 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =  36 | OPB = 187 
-#  time =                   85 | reference_results_stored = 0000000000100001000001
-# time :                   85 | monitor_results_stored = 0000000000100001000001
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 
+#  time =                   85 | reference_results_stored = 0000000001001011000000
+# time :                   85 | monitor_results_stored = 0000000001001011000000
 # <-----------------------------PASS----------------------------->
 # Driver @ 85 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 
+# ** Info: OUTPUTS ARE LATCHED :    75 0 0 0 0 0 0
+#    Time: 85 ns Started: 85 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 85 ns Started: 85 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 85 ns Started: 85 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 95 ns Started: 95 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 95 ns Started: 95 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 95 ns Started: 95 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 105 ns Started: 105 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 105 ns Started: 105 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 105 ns Started: 105 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 115 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 |
 # Monitor @ 115 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+#  RES =   451 | OFLOW = 1 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 115 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 2 | CIN = 1 | OPA = 251 | OPB =  53 
-#  time =                  115 | reference_results_stored = 0000000000000000000001
-# time :                  115 | monitor_results_stored = 0000000000000000000001
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  3 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 
+#  time =                  115 | reference_results_stored = 0000000111000011100000
+# time :                  115 | monitor_results_stored = 0000000111000011100000
 # <-----------------------------PASS----------------------------->
 # Driver @ 115 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 
+# ** Info: OUTPUTS ARE LATCHED :   451 1 0 0 0 0 0
+#    Time: 115 ns Started: 115 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 115 ns Started: 115 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 115 ns Started: 115 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 125 ns Started: 125 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 125 ns Started: 125 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 125 ns Started: 125 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 135 ns Started: 135 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 135 ns Started: 135 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 135 ns Started: 135 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 145 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 |
 # Monitor @ 145 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+#  RES =    89 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 145 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 1 | CIN = 1 | OPA = 150 | OPB =  46 
-#  time =                  145 | reference_results_stored = 0000000000000000000001
-# time :                  145 | monitor_results_stored = 0000000000000000000001
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 
+#  time =                  145 | reference_results_stored = 0000000001011001000000
+# time :                  145 | monitor_results_stored = 0000000001011001000000
 # <-----------------------------PASS----------------------------->
 # Driver @ 145 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 
+# ** Info: OUTPUTS ARE LATCHED :    89 0 0 0 0 0 0
+#    Time: 145 ns Started: 145 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 145 ns Started: 145 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 145 ns Started: 145 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 155 ns Started: 155 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 155 ns Started: 155 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 155 ns Started: 155 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 165 ns Started: 165 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 165 ns Started: 165 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 165 ns Started: 165 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 175 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 |
 # Monitor @ 175 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 1 | E = 0 | ERR = 0 |
+#  RES =    76 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 175 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA =  17 | OPB =  77 
-#  time =                  175 | reference_results_stored = 0000000000000000000100
-# time :                  175 | monitor_results_stored = 0000000000000000000100
-# <-----------------------------PASS----------------------------->
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  5 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 
+#  time =                  175 | reference_results_stored = 0000000000000000000001
+# time :                  175 | monitor_results_stored = 0000000001001100000000
+# <-----------------------------FAIL----------------------------->
 # Driver @ 175 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 10 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 
+# ** Info: OUTPUTS ARE LATCHED :    76 0 0 0 0 0 0
+#    Time: 175 ns Started: 175 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 175 ns Started: 175 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 175 ns Started: 175 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 185 ns Started: 185 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 185 ns Started: 185 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 185 ns Started: 185 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 195 ns Started: 195 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 195 ns Started: 195 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 195 ns Started: 195 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 205 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 10 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 |
 # Monitor @ 205 
-#  RES =   166 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
+#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 205 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  64 | OPB =  25 
-#  time =                  205 | reference_results_stored = 0000000010100110000000
-# time :                  205 | monitor_results_stored = 0000000010100110000000
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 10 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 
+#  time =                  205 | reference_results_stored = 0000000000000000000001
+# time :                  205 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
 # Driver @ 205 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  4 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  1 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 
+# ** Info: OUTPUTS ARE LATCHED :     0 0 0 0 0 0 1
+#    Time: 205 ns Started: 205 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 205 ns Started: 205 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 205 ns Started: 205 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 215 ns Started: 215 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 215 ns Started: 215 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 215 ns Started: 215 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 225 ns Started: 225 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 225 ns Started: 225 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 225 ns Started: 225 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 235 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  4 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  1 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 |
 # Monitor @ 235 
-#  RES =    78 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
+#  RES =     0 | OFLOW = 1 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 235 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  4 | INP_VALID = 3 | CIN = 0 | OPA =  77 | OPB = 205 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  1 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 
 #  time =                  235 | reference_results_stored = 0000000000000000000001
-# time :                  235 | monitor_results_stored = 0000000001001110000000
+# time :                  235 | monitor_results_stored = 0000000000000000100001
 # <-----------------------------FAIL----------------------------->
 # Driver @ 235 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 235 ns Started: 235 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 235 ns Started: 235 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 235 ns Started: 235 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 245 ns Started: 245 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 245 ns Started: 245 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 245 ns Started: 245 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 255 ns Started: 255 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 255 ns Started: 255 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 255 ns Started: 255 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 265 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 |
 # Monitor @ 265 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 265 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 11 | INP_VALID = 0 | CIN = 1 | OPA = 116 | OPB = 234 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  4 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 
 #  time =                  265 | reference_results_stored = 0000000000000000000001
 # time :                  265 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
 # Driver @ 265 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  2 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 265 ns Started: 265 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 265 ns Started: 265 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 265 ns Started: 265 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 275 ns Started: 275 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 275 ns Started: 275 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 275 ns Started: 275 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 285 ns Started: 285 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 285 ns Started: 285 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 285 ns Started: 285 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 295 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  2 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 |
 # Monitor @ 295 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+#  RES =    32 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 295 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  2 | INP_VALID = 0 | CIN = 0 | OPA =  30 | OPB =  76 
-#  time =                  295 | reference_results_stored = 0000000000000000000001
-# time :                  295 | monitor_results_stored = 0000000000000000000001
+#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 
+#  time =                  295 | reference_results_stored = 0000000000100000000000
+# time :                  295 | monitor_results_stored = 0000000000100000000000
 # <-----------------------------PASS----------------------------->
 # Driver @ 295 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  0 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 
-# SENDING RESPONSE 
-# Monitor @ 325 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  0 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 |
-# Monitor @ 325 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
-# Scoreboard :reference input: @ 325 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD =  0 | INP_VALID = 0 | CIN = 0 | OPA = 209 | OPB =  79 
-#  time =                  325 | reference_results_stored = 0000000000000000000001
-# time :                  325 | monitor_results_stored = 0000000000000000000001
-# <-----------------------------PASS----------------------------->
-# Driver @ 325 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 
-# SENDING RESPONSE 
-# Monitor @ 355 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 |
-# Monitor @ 355 
-#  RES =    32 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
-# Scoreboard :reference input: @ 355 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 13 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  11 
-#  time =                  355 | reference_results_stored = 0000000000100000000000
-# time :                  355 | monitor_results_stored = 0000000000100000000000
-# <-----------------------------PASS----------------------------->
-# Driver @ 355 
 #  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  35 
+# ** Info: OUTPUTS ARE LATCHED :    32 0 0 0 0 0 0
+#    Time: 295 ns Started: 295 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 295 ns Started: 295 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 295 ns Started: 295 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 305 ns Started: 305 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 305 ns Started: 305 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 305 ns Started: 305 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 315 ns Started: 315 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 315 ns Started: 315 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 315 ns Started: 315 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
-# Monitor @ 385 
+# Monitor @ 325 
 #  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  35 |
-# Monitor @ 385 
+# Monitor @ 325 
 #  RES =     8 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
-# Scoreboard :reference input: @ 385 
+# Scoreboard :reference input: @ 325 
 #  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 0 | OPA =   1 | OPB =  35 
-#  time =                  385 | reference_results_stored = 0000000000001000000001
-# time :                  385 | monitor_results_stored = 0000000000001000000001
+#  time =                  325 | reference_results_stored = 0000000000001000000001
+# time :                  325 | monitor_results_stored = 0000000000001000000001
 # <-----------------------------PASS----------------------------->
 #  count =           1 
-# Driver @ 385 
+# Driver @ 325 
 #  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  99 | OPB = 187 
+# ** Info: OUTPUTS ARE LATCHED :     8 0 0 0 0 0 1
+#    Time: 325 ns Started: 325 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 325 ns Started: 325 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 325 ns Started: 325 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 335 ns Started: 335 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 335 ns Started: 335 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 335 ns Started: 335 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 345 ns Started: 345 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 345 ns Started: 345 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 345 ns Started: 345 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 #  count =           2 
-# Driver @ 415 
+# Driver @ 355 
 #  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 0 | CIN = 1 | OPA =  27 | OPB = 200 
-# Monitor @ 415 
+# Monitor @ 355 
 #  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  99 | OPB = 187 |
+# Monitor @ 355 
+#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+# Scoreboard :reference input: @ 355 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 0 | CIN = 1 | OPA =  27 | OPB = 200 
+#  time =                  355 | reference_results_stored = 0000000000000000000001
+# time :                  355 | monitor_results_stored = 0000000000000000000001
+# <-----------------------------PASS----------------------------->
+# ** Info: OUTPUTS ARE LATCHED :     0 0 0 0 0 0 1
+#    Time: 355 ns Started: 355 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 39 Expr: res==$past(res)
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 355 ns Started: 355 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 355 ns Started: 355 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 365 ns Started: 365 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 365 ns Started: 365 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 365 ns Started: 365 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 375 ns Started: 375 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 375 ns Started: 375 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 375 ns Started: 375 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           3 
+# Driver @ 385 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 
+# Monitor @ 385 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 0 | CIN = 1 | OPA =  27 | OPB = 200 |
+# Monitor @ 385 
+#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
+# Scoreboard :reference input: @ 385 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 
+#  time =                  385 | reference_results_stored = 0000000000000000000001
+# time :                  385 | monitor_results_stored = 0000000000000000000001
+# <-----------------------------PASS----------------------------->
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 385 ns Started: 385 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 385 ns Started: 385 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 385 ns Started: 385 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 395 ns Started: 395 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 395 ns Started: 395 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 395 ns Started: 395 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 405 ns Started: 405 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 405 ns Started: 405 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 405 ns Started: 405 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           4 
+# Driver @ 415 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 
+# Monitor @ 415 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 |
 # Monitor @ 415 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 415 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 0 | CIN = 1 | OPA =  27 | OPB = 200 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 
 #  time =                  415 | reference_results_stored = 0000000000000000000001
 # time :                  415 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
-#  count =           3 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 415 ns Started: 415 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 415 ns Started: 415 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 415 ns Started: 415 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 425 ns Started: 425 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 425 ns Started: 425 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 425 ns Started: 425 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 435 ns Started: 435 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 435 ns Started: 435 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 435 ns Started: 435 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           5 
 # Driver @ 445 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 
 # Monitor @ 445 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 0 | CIN = 1 | OPA =  27 | OPB = 200 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 |
 # Monitor @ 445 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 445 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 
 #  time =                  445 | reference_results_stored = 0000000000000000000001
 # time :                  445 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
-#  count =           4 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 445 ns Started: 445 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 445 ns Started: 445 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 445 ns Started: 445 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 455 ns Started: 455 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 455 ns Started: 455 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 455 ns Started: 455 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 465 ns Started: 465 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 465 ns Started: 465 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 465 ns Started: 465 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           6 
 # Driver @ 475 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 
 # Monitor @ 475 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 0 | OPA = 232 | OPB = 138 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 |
 # Monitor @ 475 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 475 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 
 #  time =                  475 | reference_results_stored = 0000000000000000000001
 # time :                  475 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
-#  count =           5 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 475 ns Started: 475 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 475 ns Started: 475 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 475 ns Started: 475 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 485 ns Started: 485 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 485 ns Started: 485 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 485 ns Started: 485 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 495 ns Started: 495 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 495 ns Started: 495 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 495 ns Started: 495 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           7 
 # Driver @ 505 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 
 # Monitor @ 505 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 2 | CIN = 0 | OPA =  46 | OPB =  53 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 |
 # Monitor @ 505 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 505 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 
 #  time =                  505 | reference_results_stored = 0000000000000000000001
 # time :                  505 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------PASS----------------------------->
-#  count =           6 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 505 ns Started: 505 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 505 ns Started: 505 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 505 ns Started: 505 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 515 ns Started: 515 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 515 ns Started: 515 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 515 ns Started: 515 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 525 ns Started: 525 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 525 ns Started: 525 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 525 ns Started: 525 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           8 
 # Driver @ 535 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 
 # Monitor @ 535 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 220 | OPB = 218 |
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 |
 # Monitor @ 535 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 535 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 
-#  time =                  535 | reference_results_stored = 0000000000000000000001
-# time :                  535 | monitor_results_stored = 0000000000000000000001
-# <-----------------------------PASS----------------------------->
-#  count =           7 
-# Driver @ 565 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 
-# Monitor @ 565 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA =  18 | OPB =   2 |
-# Monitor @ 565 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
-# Scoreboard :reference input: @ 565 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 
-#  time =                  565 | reference_results_stored = 0000000000000000000001
-# time :                  565 | monitor_results_stored = 0000000000000000000001
-# <-----------------------------PASS----------------------------->
-#  count =           8 
-# Driver @ 595 
 #  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 
+#  time =                  535 | reference_results_stored = 0000000000000000001000
+# time :                  535 | monitor_results_stored = 0000000000000000000001
+# <-----------------------------FAIL----------------------------->
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 535 ns Started: 535 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 535 ns Started: 535 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 535 ns Started: 535 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 545 ns Started: 545 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 545 ns Started: 545 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 545 ns Started: 545 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 555 ns Started: 555 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 555 ns Started: 555 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 555 ns Started: 555 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# SENDING RESPONSE 
+# Monitor @ 565 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 |
+# Monitor @ 565 
+#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 1 | L = 0 | E = 0 | ERR = 0 |
+# Scoreboard :reference input: @ 565 
+#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 
+#  time =                  565 | reference_results_stored = 0000000000000000001000
+# time :                  565 | monitor_results_stored = 0000000000000000001000
+# <-----------------------------PASS----------------------------->
+#  count =           1 
+# Driver @ 565 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 0 | CIN = 1 | OPA = 124 | OPB = 252 
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 565 ns Started: 565 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 565 ns Started: 565 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 565 ns Started: 565 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 575 ns Started: 575 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 575 ns Started: 575 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 575 ns Started: 575 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 585 ns Started: 585 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 585 ns Started: 585 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 585 ns Started: 585 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+#  count =           2 
+# Driver @ 595 
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
 # Monitor @ 595 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 1 | CIN = 1 | OPA = 204 | OPB = 132 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 0 | CIN = 1 | OPA = 124 | OPB = 252 |
 # Monitor @ 595 
 #  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
 # Scoreboard :reference input: @ 595 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 
-#  time =                  595 | reference_results_stored = 0000000000000000001000
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
+#  time =                  595 | reference_results_stored = 0000000001011110000000
 # time :                  595 | monitor_results_stored = 0000000000000000000001
 # <-----------------------------FAIL----------------------------->
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 595 ns Started: 595 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 595 ns Started: 595 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 595 ns Started: 595 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 605 ns Started: 605 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 605 ns Started: 605 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 605 ns Started: 605 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
+# ** Info: OUTPUTS ARE NOT LATCHED
+#    Time: 615 ns Started: 615 ns  Scope: top.vif.ASSERT.ALU_CLOCK_ENABLE File: alu_assertions.sv Line: 38
+# ** Info: RESET IS NOT TRIGGERED
+#    Time: 615 ns Started: 615 ns  Scope: top.vif.ASSERT.ALU_RESET File: alu_assertions.sv Line: 29 Expr: rst
+# ** Info: INPUTS SIGNALS ARE KNOWN
+#    Time: 615 ns Started: 615 ns  Scope: top.vif.ASSERT.ALU_UNKNOWN File: alu_assertions.sv Line: 24
 # SENDING RESPONSE 
 # Monitor @ 625 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 |
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 |
 # Monitor @ 625 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 1 | L = 0 | E = 0 | ERR = 0 |
+#  RES =    94 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 0 |
 # Scoreboard :reference input: @ 625 
-#  RST = 0 | CE = 1 | MODE = 1 | CMD =  8 | INP_VALID = 3 | CIN = 1 | OPA = 251 | OPB = 250 
-#  time =                  625 | reference_results_stored = 0000000000000000001000
-# time :                  625 | monitor_results_stored = 0000000000000000001000
+#  RST = 0 | CE = 1 | MODE = 0 | CMD =  5 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
+#  time =                  625 | reference_results_stored = 0000000001011110000000
+# time :                  625 | monitor_results_stored = 0000000001011110000000
 # <-----------------------------PASS----------------------------->
-#  count =           1 
-# Driver @ 625 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 0 | CIN = 1 | OPA = 124 | OPB = 252 
-#  count =           2 
-# Driver @ 655 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
-# Monitor @ 655 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 0 | CIN = 1 | OPA = 124 | OPB = 252 |
-# Monitor @ 655 
-#  RES =     0 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
-# Scoreboard :reference input: @ 655 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
-#  time =                  655 | reference_results_stored = 0000000010001101000001
-# time :                  655 | monitor_results_stored = 0000000000000000000001
-# <-----------------------------FAIL----------------------------->
-# SENDING RESPONSE 
-# Monitor @ 685 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 |
-# Monitor @ 685 
-#  RES =   141 | OFLOW = 0 | COUT = 0 | G = 0 | L = 0 | E = 0 | ERR = 1 |
-# Scoreboard :reference input: @ 685 
-#  RST = 0 | CE = 1 | MODE = 0 | CMD = 12 | INP_VALID = 3 | CIN = 1 | OPA =  99 | OPB = 194 
-#  time =                  685 | reference_results_stored = 0000000010001101000001
-# time :                  685 | monitor_results_stored = 0000000010001101000001
-# <-----------------------------PASS----------------------------->
-# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 685: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO alu_coverage.sv(94) @ 685: uvm_test_top.alu_environment.alu_coverage [alu_coverage] [DRIVER] Coverage ------> 71.32%,
-# UVM_INFO alu_coverage.sv(95) @ 685: uvm_test_top.alu_environment.alu_coverage [alu_coverage] [MONITOR] Coverage ------> 75.00%
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 625: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO alu_coverage.sv(94) @ 625: uvm_test_top.alu_environment.alu_coverage [alu_coverage] [DRIVER] Coverage ------> 72.08%,
+# UVM_INFO alu_coverage.sv(95) @ 625: uvm_test_top.alu_environment.alu_coverage [alu_coverage] [MONITOR] Coverage ------> 75.00%
 # 
 # --- UVM Report Summary ---
 # 
@@ -376,7 +722,7 @@
 # [UVMTOP]     1
 # [alu_coverage]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 685 ns  Iteration: 67  Instance: /top
+#    Time: 625 ns  Iteration: 67  Instance: /top
 # Saving coverage database on exit...
-# End time: 17:18:04 on Aug 17,2025, Elapsed time: 0:00:03
+# End time: 16:45:08 on Aug 18,2025, Elapsed time: 0:00:04
 # Errors: 0, Warnings: 1

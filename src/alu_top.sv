@@ -1,6 +1,8 @@
+`include "defines.sv"
 `include "alu_design.sv"
 `include "alu_interface.sv"
 `include "alu_package.sv"
+`include "alu_assertions.sv"
 import uvm_pkg::*;
 import alu_pkg::*;
 module top;
@@ -36,6 +38,25 @@ module top;
 		.L(vif.l),
 		.E(vif.e)
 	);
+
+ bind vif alu_assertions ASSERT(
+     .clk(vif.clk),
+	   .rst(vif.rst),
+	   .ce(vif.ce),
+	   .mode(vif.mode),
+	   .cin(vif.cin),
+	   .inp_valid(vif.inp_valid),
+	   .cmd(vif.cmd),
+	   .opa(vif.opa),
+	   .opb(vif.opb),
+	   .res(vif.res),
+	   .err(vif.err),
+	   .oflow(vif.oflow),
+	   .cout(vif.cout),
+	   .g(vif.g),
+	   .l(vif.l),
+	   .e(vif.e)
+ );
 
 	initial begin 
 		uvm_config_db#(virtual alu_interface)::set(null,"*","vif",vif);

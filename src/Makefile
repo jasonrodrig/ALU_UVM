@@ -17,12 +17,12 @@ all:
 main:
 	source $(QUESTA)
 	make clean
-	vlog -sv +acc +fcover -l alu.log alu_top.sv
-	vsim -vopt work.top -voptargs=+acc=npr -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll alu_coverage.ucdb; run -all; exit"
-	vcover report -html alu_coverage.ucdb -htmldir covReport -details
+	vlog -sv +acc +fcover -l alu_top.log alu_top.sv
+	vsim -vopt work.top -voptargs=+acc=npr -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit"
+	vcover report -html coverage.ucdb -htmldir covReport -details
  
 read:
-	vcover report -details alu_coverage.ucdb
+	vcover report -details coverage.ucdb
 
 view:
 	firefox ./covReport/index.html

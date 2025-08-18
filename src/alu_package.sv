@@ -1,6 +1,7 @@
 `include "uvm_macros.svh"
 package alu_pkg;
   import uvm_pkg::*;
+	`include "defines.sv"
   `include "alu_sequence_item.sv"
   `include "alu_sequencer.sv"
   `include "alu_driver.sv"

@@ -6,12 +6,12 @@ class alu_scoreboard extends uvm_scoreboard;
   alu_sequence_item driver_queue[$];
   alu_sequence_item monitor_queue[$];
   
-  bit [21:0] monitor_results;
-  bit [21:0] reference_results;
+  logic [(RESULT_WIDTH - 1 ) + 6:0] monitor_results;
+  logic [(RESULT_WIDTH - 1 ) + 6:0] reference_results;
   
-  reg [15:0] t_mul;
+  reg [RESULT_WIDTH - 1:0] t_mul;
    
-  logic [15:0] ref_res ;
+  logic [RESULT_WIDTH -1:0] ref_res ;
   logic  ref_err , ref_oflow , ref_cout , ref_g , ref_l , ref_e;
   
   `uvm_component_utils(alu_scoreboard)
@@ -74,21 +74,21 @@ class alu_scoreboard extends uvm_scoreboard;
   task alu_reference_model(input alu_sequence_item packet_3);
     if(packet_3.rst == 1 )begin
       ref_res ='b0 ;
-      ref_oflow = 0; 
-      ref_cout = 0;
-      ref_g = 0 ; 
-      ref_l = 0; 
-      ref_e = 0; 
-      ref_err = 0;
+      ref_oflow = 'b0; 
+      ref_cout = 'b0;
+      ref_g = 'b0 ; 
+      ref_l = 'b0; 
+      ref_e = 'b0; 
+      ref_err = 'b0;
      end
     else if(packet_3.ce)begin
       ref_res ='b0 ;
-      ref_oflow = 0; 
-      ref_cout = 0;
-      ref_g = 0 ; 
-      ref_l = 0; 
-      ref_e = 0; 
-      ref_err = 0;
+      ref_oflow = 'b0; 
+      ref_cout = 'b0;
+      ref_g = 'b0 ; 
+      ref_l = 'b0; 
+      ref_e = 'b0; 
+      ref_err = 'b0;
       t_mul = 'b0;
       if( packet_3.mode ) 
         arithematic_operation(packet_3);
@@ -109,7 +109,7 @@ class alu_scoreboard extends uvm_scoreboard;
         if( packet_3.inp_valid == 3) 
            begin
              ref_res = packet_3.opa + packet_3.opb;
-             ref_cout = ( ref_res[8] ) ? 1 : 0;
+             ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
              $display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
            end
         else ref_err = 1;
@@ -118,8 +118,8 @@ class alu_scoreboard extends uvm_scoreboard;
       1:begin
          if( packet_3.inp_valid == 3) 
            begin
-             ref_res = ( packet_3.opa - packet_3.opb ) & ( { { 7{1'b0} } , { 9{1'b1} } } );
-             ref_oflow = ( packet_3.opa < packet_3.opb ) ? 1 :0;
+             ref_res = ( packet_3.opa - packet_3.opb ) & ( { { (`DATA_WIDTH - 1){1'b0} } , { (`DATA_WIDTH+1){1'b1} } } );
+             ref_oflow = ( ( packet_3.opa < packet_3.opb ) || ( ( packet_3.opa == packet_3.opb ) && ( packet_3.cin == 1 ) ) ) ? 1 :0;
            end
         else ref_err = 1;
         end
@@ -128,7 +128,7 @@ class alu_scoreboard extends uvm_scoreboard;
         if( packet_3.inp_valid == 3) 
            begin
              ref_res = packet_3.opa + packet_3.opb + packet_3.cin;
-             ref_cout = ( ref_res[8] ) ? 1 : 0;
+             ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
              $display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
            end
         else ref_err = 1;
@@ -137,7 +137,7 @@ class alu_scoreboard extends uvm_scoreboard;
       3:begin
         if( packet_3.inp_valid == 3) 
            begin
-             ref_res = ( packet_3.opa - packet_3.opb - packet_3.cin ) & ( { { 7{1'b0} } , { 9{1'b1} } } );
+             ref_res = ( packet_3.opa - packet_3.opb - packet_3.cin ) & ( { { (`DATA_WIDTH - 1){1'b0} } , { (`DATA_WIDTH+1){1'b1} } } );
              ref_oflow = ( ( packet_3.opa < packet_3.opb ) || ( ( packet_3.opa == packet_3.opb ) && ( packet_3.cin == 1 ) ) ) ? 1 :0;
            end
         else ref_err = 1;
@@ -147,7 +147,7 @@ class alu_scoreboard extends uvm_scoreboard;
         if( packet_3.inp_valid == 1)
           begin
 		    ref_res = packet_3.opa + 1;
-            ref_cout = ( ref_res[8] ) ? 1 : 0;
+            ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
           end
         else ref_err = 1;
         end
@@ -155,7 +155,7 @@ class alu_scoreboard extends uvm_scoreboard;
       5:begin
         if( packet_3.inp_valid == 1)
           begin
-            ref_res = ( packet_3.opa - 1 ) & ( { { 7{1'b0} } , { 9{1'b1} } } );
+            ref_res = ( packet_3.opa - 1 ) & ( { { (`DATA_WIDTH-1){1'b0} } , { (`DATA_WIDTH + 1){1'b1} } } );
             ref_oflow = ( packet_3.opa == 0 ) ? 1 : 0;
           end
         else ref_err = 1;
@@ -165,7 +165,7 @@ class alu_scoreboard extends uvm_scoreboard;
         if( packet_3.inp_valid == 2)
           begin
 		    ref_res = packet_3.opb + 1;
-            ref_cout = ( ref_res[8] ) ? 1 : 0;
+            ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
           end
         else ref_err = 1;
         end
@@ -173,7 +173,7 @@ class alu_scoreboard extends uvm_scoreboard;
       7:begin
         if( packet_3.inp_valid == 2)
           begin
-            ref_res = ( packet_3.opb - 1 ) & ( { { 7{1'b0} } , { 9{1'b1} } } );
+            ref_res = ( packet_3.opb - 1 ) & ( { { (`DATA_WIDTH-1){1'b0} } , { (`DATA_WIDTH+1){1'b1} } } );
             ref_oflow = ( packet_3.opb == 0 ) ? 1 : 0;
           end
         else ref_err = 1;
@@ -221,7 +221,7 @@ class alu_scoreboard extends uvm_scoreboard;
       
       10:begin
          if(packet_3.inp_valid == 3) begin
-           bit [7:0] temp = ( packet_3.opa << 1 ); 
+           bit [`DATA_WIDTH - 1:0] temp = ( packet_3.opa << 1 ); 
            t_mul  = ( temp ) * ( packet_3.opb );
 		   ref_res =  t_mul;
          end
@@ -239,93 +239,93 @@ class alu_scoreboard extends uvm_scoreboard;
       
       0: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( packet_3.opa & packet_3.opb ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( packet_3.opa & packet_3.opb ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
          
       1: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( ~( packet_3.opa & packet_3.opb ) ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( ~( packet_3.opa & packet_3.opb ) ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
                  
       2: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( packet_3.opa | packet_3.opb ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( packet_3.opa | packet_3.opb ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
          
       3: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( ~( packet_3.opa | packet_3.opb ) ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( ~( packet_3.opa | packet_3.opb ) ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
          
       4: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( packet_3.opa ^ packet_3.opb ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( packet_3.opa ^ packet_3.opb ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
          
       5: begin
          if(packet_3.inp_valid == 3) begin
-           ref_res = ( ~( packet_3.opa ^ packet_3.opb ) ) & ( { { 8{1'b0} } , { 8{1'b1} } } ); 
+           ref_res = ( ~( packet_3.opa ^ packet_3.opb ) ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } ); 
 	     end
          else ref_err = 1;
          end
          
       6: begin
          if(packet_3.inp_valid == 1) begin
-           ref_res = ( ~( packet_3.opa ) ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+           ref_res = ( ~( packet_3.opa ) ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	     end
          else ref_err = 1;
          end
          
       7: begin
          if(packet_3.inp_valid == 2) begin
-           ref_res = ( ~( packet_3.opb ) ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+           ref_res = ( ~( packet_3.opb ) ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	     end
          else ref_err = 1;
          end
          
       8: begin
          if(packet_3.inp_valid == 1) begin
-           ref_res = ( ( packet_3.opa ) >> 1 ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+           ref_res = ( ( packet_3.opa ) >> 1 ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	     end
          else ref_err = 1;
          end
          
       9: begin
          if(packet_3.inp_valid == 1) begin
-           ref_res = ( ( packet_3.opa ) << 1 ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+           ref_res = ( ( packet_3.opa ) << 1 ) & ( { {`DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	     end
          else ref_err = 1;
          end
          
       10: begin
           if(packet_3.inp_valid == 2) begin
-            ref_res = ( ( packet_3.opb ) >> 1 ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+            ref_res = ( ( packet_3.opb ) >> 1 ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	      end
           else ref_err = 1;
           end
          
       11: begin
           if(packet_3.inp_valid == 2) begin
-            ref_res = ( ( packet_3.opb ) << 1 ) & ( { { 8{1'b0} } , { 8{1'b1} } } );
+            ref_res = ( ( packet_3.opb ) << 1 ) & ( { { `DATA_WIDTH{1'b0} } , { `DATA_WIDTH{1'b1} } } );
 	      end
           else ref_err = 1;
           end
          
       12: begin
           if(packet_3.inp_valid == 3) begin
-            ref_res[ 8 - 1 : 0 ] = 
-            ( packet_3.opa << packet_3.opb[($clog2(8) - 1):0] ) | ( packet_3.opa >> ( 8 - packet_3.opb[($clog2(8) - 1):0]) );
-            if(|(packet_3.opb[ 8 - 1 : ($clog2(8) + 1)]))      
+            ref_res[ `DATA_WIDTH - 1 : 0 ] = 
+            ( packet_3.opa << packet_3.opb[($clog2(`DATA_WIDTH) - 1):0] ) | ( packet_3.opa >> ( `DATA_WIDTH - packet_3.opb[($clog2(`DATA_WIDTH) - 1):0]) );
+            if(|(packet_3.opb[ `DATA_WIDTH - 1 : ($clog2(`DATA_WIDTH) + 1)]))      
                ref_err = 1; 
             else          
                ref_err = 0;
@@ -335,9 +335,9 @@ class alu_scoreboard extends uvm_scoreboard;
          
       13: begin
           if(packet_3.inp_valid == 3) begin
-            ref_res[ 8 - 1 : 0 ] = 
-            ( packet_3.opa >> packet_3.opb[($clog2(8) - 1):0] ) | ( packet_3.opa << ( 8 - packet_3.opb[($clog2(8) - 1):0]) );
-            if(|(packet_3.opb[ 8 - 1 : ($clog2(8) + 1)]))      
+            ref_res[ `DATA_WIDTH - 1 : 0 ] = 
+            ( packet_3.opa >> packet_3.opb[($clog2(`DATA_WIDTH) - 1):0] ) | ( packet_3.opa << ( `DATA_WIDTH - packet_3.opb[($clog2(`DATA_WIDTH) - 1):0]) );
+            if(|(packet_3.opb[ `DATA_WIDTH - 1 : ($clog2(`DATA_WIDTH) + 1)]))      
                ref_err = 1; 
             else          
                ref_err = 0;

@@ -1,5 +1,5 @@
 -html
-alu_coverage.ucdb
+coverage.ucdb
 -htmldir
 covReport
 -details

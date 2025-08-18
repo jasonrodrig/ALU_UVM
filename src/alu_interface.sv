@@ -1,9 +1,9 @@
 interface alu_interface(input bit clk);
 	logic ce, mode , cin , rst;
-	logic [7:0] opa , opb; 
-	logic [3:0] cmd;
+	logic [`DATA_WIDTH - 1 :0] opa , opb; 
+	logic [`CMD_WIDTH - 1 :0] cmd;
 	logic [1:0] inp_valid;
-	logic [15:0] res ;
+	logic [RESULT_WIDTH - 1 :0] res ;
 	logic  err , oflow , cout , g , l , e;
 
 	clocking alu_driver_cb @(posedge clk);

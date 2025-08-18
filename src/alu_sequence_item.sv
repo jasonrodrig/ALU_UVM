@@ -1,10 +1,10 @@
 class alu_sequence_item extends uvm_sequence_item;
 	rand logic rst;
 	rand logic ce, mode , cin;
-	rand logic [7:0] opa , opb;
-	rand logic [4:0] cmd;
+	rand logic [`DATA_WIDTH - 1:0] opa , opb;
+	rand logic [`CMD_WIDTH - 1:0] cmd;
 	rand logic [1:0] inp_valid;
-       logic [15:0] res ;
+       logic [RESULT_WIDTH - 1 :0] res ;
 	     logic  err , oflow , cout , g , l , e;
 
 	`uvm_object_utils_begin(alu_sequence_item)

@@ -8,7 +8,7 @@ class alu_sequence extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1)begin
+		repeat(`no_of_items)begin
 			req = alu_sequence_item::type_id::create("req");
 			wait_for_grant();
 			void'(req.randomize());
@@ -27,7 +27,7 @@ class rst_ce extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(2) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -47,7 +47,7 @@ class single_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -70,7 +70,7 @@ class single_operand_logical extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -93,7 +93,7 @@ class two_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -116,7 +116,7 @@ class two_operand_logical extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -139,7 +139,7 @@ class single_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -162,7 +162,7 @@ class single_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -185,7 +185,7 @@ class two_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -208,7 +208,7 @@ class two_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -231,7 +231,7 @@ class rotate_right_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -256,7 +256,7 @@ class rotate_left_error extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -281,7 +281,7 @@ class cycle_16_arithmatic extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 
@@ -304,7 +304,7 @@ class cycle_16_logical extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(1) begin
+		repeat(`no_of_items) begin
 			`uvm_do_with( 
 				req,
 				{ 

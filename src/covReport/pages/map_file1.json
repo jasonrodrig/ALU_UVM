@@ -1,3 +1,8 @@
 var g_data = {'dummy':{null},
-'/alu_pkg/alu_coverage':{h:'741',g:1,z:1},
-'/alu_pkg':{h:'730',z:1}};
+'work.alu_assertions':{h:'7',a:1,z:1},
+'/top/vif/ASSERT':{h:'12',a:1,z:1},
+'/top/vif':{h:'11',z:1},
+'work.top':{h:'6',z:1},
+'/top':{h:'10',z:1},
+'/alu_pkg/alu_coverage':{h:'746',g:1,z:1},
+'/alu_pkg':{h:'735',z:1}};
