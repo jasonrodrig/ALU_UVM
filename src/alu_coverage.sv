@@ -12,11 +12,13 @@ class alu_coverage extends uvm_component;
 
 	covergroup input_coverage;
 		option.per_instance = 1;
-		//opa         : coverpoint driv.opa       { bins opa[] = {[0:255]} with (item / 32 ); }
-		//opb         : coverpoint driv.opb       { bins opb[] = {[0:255]} with (item / 32 ); }
-		cmd         : coverpoint active_mon.cmd { 
-		                                         	bins arithmatic_cmd[] = {[0:10]} iff (active_mon.mode == 1'b1);
-                                        			bins logical_cmd[]    = {[0:13]} iff (active_mon.mode == 1'b0);
+		opa       : coverpoint active_mon.opa { bins opa = {[0:255]} with (item / 32 ); }
+		opb       : coverpoint active_mon.opb { bins opb = {[0:255]} with (item / 32 ); }
+		cmd       : coverpoint active_mon.cmd { 
+		                         bins arithmatic_cmd[] = {[0:10]} iff (active_mon.mode == 1'b1);
+                             bins logical_cmd[]    = {[0:13]} iff (active_mon.mode == 1'b0);
+			                       ignore_bins invalid_arith_cmd[] = {11,12,13,14,15} iff(active_mon.mode == 1'b1);
+                             ignore_bins invalid_logic_cmd[] = {14,15} iff(active_mon.mode == 1'b0);
 		                                        }
 		inp_valid   : coverpoint active_mon.inp_valid { bins inp_valid[]  = {0,1,2,3}; }
 		cin         : coverpoint active_mon.cin       { bins cin[]        = {0,1}; }
@@ -57,7 +59,7 @@ class alu_coverage extends uvm_component;
 
 	covergroup output_coverage;
 		option.per_instance = 1;
-		//	result : coverpoint mon.res  { bins res_bins[]   = {[0:65535]} with (item / 64); }
+		result : coverpoint passive_mon.res  { bins res_bins     = {[0:512]} with (item / 64); }
 		oflow  : coverpoint passive_mon.oflow{ bins oflow[]      = {0,1}; }
 		cout   : coverpoint passive_mon.cout { bins cout[]       = {0,1}; }
 		err    : coverpoint passive_mon.err  { bins err[]        = {0,1}; }

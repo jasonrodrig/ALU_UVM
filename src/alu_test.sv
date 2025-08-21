@@ -266,7 +266,7 @@ class cycle_16_arithmatic_test extends alu_test;
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
-		seq11 = cycle_16_arithmatic::type_id::create("alu_seq9");
+		seq11 = cycle_16_arithmatic::type_id::create("alu_seq11");
 	endfunction : build_phase
 
 	task run_phase(uvm_phase phase);
@@ -287,7 +287,7 @@ class cycle_16_logical_test extends alu_test;
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
-		seq12 = cycle_16_logical::type_id::create("alu_seq10");
+		seq12 = cycle_16_logical::type_id::create("alu_seq12");
 	endfunction : build_phase
 
 	task run_phase(uvm_phase phase);
@@ -297,6 +297,89 @@ class cycle_16_logical_test extends alu_test;
 	endtask
 endclass
 
+class comparison_test extends alu_test;
+
+	`uvm_component_utils( comparison_test)
+	 comparison seq13;
+
+	function new(string name = "comparison_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq13 = comparison::type_id::create("alu_seq13");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq13.start(alu_env.alu_active_agt.alu_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+class invalid_cmd_test extends alu_test;
+
+	`uvm_component_utils( invalid_cmd_test)
+	 invalid_cmd seq14;
+
+	function new(string name = "invalid_cmd_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq14 = invalid_cmd::type_id::create("alu_seq14");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq14.start(alu_env.alu_active_agt.alu_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+class cycle_16_arithmatic_error_test extends alu_test;
+
+	`uvm_component_utils( cycle_16_arithmatic_error_test)
+	cycle_16_arithmatic_error seq15;
+
+	function new(string name = "cycle_16_arithmatic_error_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq15 = cycle_16_arithmatic_error::type_id::create("alu_seq15");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq15.start(alu_env.alu_active_agt.alu_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+class cycle_16_logical_error_test extends alu_test;
+
+	`uvm_component_utils( cycle_16_logical_error_test)
+	cycle_16_logical_error seq16;
+
+	function new(string name = "cycle_16_logical_error_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq16 = cycle_16_logical_error::type_id::create("alu_seq16");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq16.start(alu_env.alu_active_agt.alu_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
 
 class alu_regression_test extends alu_test;
 

@@ -29,7 +29,7 @@ class rst_ce extends uvm_sequence#(alu_sequence_item);
 	task body();
 //		repeat(`no_of_items) begin
 		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
-			`uvm_do_with(req,{req.mode == 1;req.rst == 0;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
+			`uvm_do_with(req,{req.mode == 0;req.rst == 0;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
 		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 1;req.cmd== 0;req.inp_valid == 3;})
 //		end
 	endtask
@@ -315,6 +315,129 @@ class cycle_16_logical extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+class comparison extends uvm_sequence#(alu_sequence_item);
+	`uvm_object_utils(comparison)
+
+	function new(string name = "comparison");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items)begin 
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa == req.opb;
+				}
+		  )
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa > req.opb;
+				}
+		  )
+    	`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa < req.opb;
+				}
+		  )
+		end
+	endtask
+endclass 
+
+class invalid_cmd extends uvm_sequence#(alu_sequence_item);
+	`uvm_object_utils(invalid_cmd)
+
+	function new(string name = "invalid_cmd");
+		super.new(name);
+	endfunction
+
+	task body();
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 15;
+				}
+			)
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid == 3;
+					req.cmd == 15;
+				}
+			)		
+	endtask
+endclass 
+
+class cycle_16_arithmatic_error extends uvm_sequence#(alu_sequence_item);
+	`uvm_object_utils(cycle_16_arithmatic_error)
+
+	function new(string name = "cycle_16_arithmatic_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid dist{ 1:= 100, 2:= 50, 3:= 1 };
+					req.cmd inside {[0:3],[8:10]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+class cycle_16_logical_error extends uvm_sequence#(alu_sequence_item);
+	`uvm_object_utils(cycle_16_logical_error)
+
+	function new(string name = "cycle_16_logical_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid dist{ 1:= 100, 2:= 50, 3:= 1 };
+					req.cmd inside {[0:5],[12:13]};
+				}
+			)
+		end
+	endtask
+endclass 
+
 class alu_regression extends uvm_sequence#(alu_sequence_item);
 
 	`uvm_object_utils(alu_regression)
@@ -336,6 +459,12 @@ class alu_regression extends uvm_sequence#(alu_sequence_item);
 	cycle_16_arithmatic seq11;
 	cycle_16_logical    seq12;
 
+  comparison seq13;
+  invalid_cmd seq14;
+
+	cycle_16_arithmatic_error seq15;
+	cycle_16_logical_error    seq16;
+	
 	function new(string name = "alu_regression");
 		super.new(name);
 	endfunction
@@ -353,6 +482,10 @@ class alu_regression extends uvm_sequence#(alu_sequence_item);
 		`uvm_do(seq9)         
 		`uvm_do(seq10)
 		`uvm_do(seq11)         
-		`uvm_do(seq12) 
+		`uvm_do(seq12)
+		`uvm_do(seq13)
+		`uvm_do(seq14)
+		`uvm_do(seq15)
+		`uvm_do(seq16)
   endtask
 endclass
