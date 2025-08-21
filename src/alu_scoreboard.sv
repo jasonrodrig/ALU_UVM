@@ -11,7 +11,7 @@ class alu_scoreboard extends uvm_scoreboard;
   
   reg [RESULT_WIDTH - 1:0] t_mul;
    
-  logic [RESULT_WIDTH -1:0] ref_res ;
+  logic [RESULT_WIDTH: 0] ref_res ;
   logic  ref_err , ref_oflow , ref_cout , ref_g , ref_l , ref_e;
   
   `uvm_component_utils(alu_scoreboard)
@@ -73,22 +73,22 @@ class alu_scoreboard extends uvm_scoreboard;
   
   task alu_reference_model(input alu_sequence_item packet_3);
     if(packet_3.rst == 1 )begin
-      ref_res ='b0 ;
-      ref_oflow = 'b0; 
-      ref_cout = 'b0;
-      ref_g = 'b0 ; 
-      ref_l = 'b0; 
-      ref_e = 'b0; 
-      ref_err = 'b0;
+      ref_res = 16'bz ;
+      ref_oflow = 'bz; 
+      ref_cout = 'bz;
+      ref_g = 'bz ; 
+      ref_l = 'bz; 
+      ref_e = 'bz; 
+      ref_err = 'bz;
      end
     else if(packet_3.ce)begin
-      ref_res ='b0 ;
-      ref_oflow = 'b0; 
-      ref_cout = 'b0;
-      ref_g = 'b0 ; 
-      ref_l = 'b0; 
-      ref_e = 'b0; 
-      ref_err = 'b0;
+      ref_res ='bz ;
+      ref_oflow = 'bz; 
+      ref_cout = 'bz;
+      ref_g = 'bz ; 
+      ref_l = 'bz; 
+      ref_e = 'bz; 
+      ref_err = 'bz;
       t_mul = 'b0;
       if( packet_3.mode ) 
         arithematic_operation(packet_3);
@@ -110,7 +110,7 @@ class alu_scoreboard extends uvm_scoreboard;
            begin
              ref_res = packet_3.opa + packet_3.opb;
              ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
-             $display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
+             //$display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
            end
         else ref_err = 1;
         end
@@ -129,7 +129,7 @@ class alu_scoreboard extends uvm_scoreboard;
            begin
              ref_res = packet_3.opa + packet_3.opb + packet_3.cin;
              ref_cout = ( ref_res[`DATA_WIDTH] ) ? 1 : 0;
-             $display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
+             //$display( "ref_res = %0d | ref_cout = %0d ", ref_res, ref_cout);
            end
         else ref_err = 1;
         end
@@ -183,26 +183,26 @@ class alu_scoreboard extends uvm_scoreboard;
         if( packet_3.inp_valid == 3 )
           begin
             
-            ref_res = 0;
+            ref_res = 16'bz;
             
             if (packet_3.opa == packet_3.opb )
             begin
               ref_e = 'b1;
-              ref_g = 'b0;
-              ref_l = 'b0;
+              ref_g = 'bz;
+              ref_l = 'bz;
             end
             
             else if( packet_3.opa > packet_3.opb )
             begin
-              ref_e = 'b0;
+              ref_e = 'bz;
               ref_g = 'b1;
-              ref_l = 'b0;
+              ref_l = 'bz;
             end		          
             
             else 
             begin
-              ref_e = 'b0;
-              ref_g = 'b0;
+              ref_e = 'bz;
+              ref_g = 'bz;
               ref_l = 'b1;
             end
           
@@ -214,7 +214,7 @@ class alu_scoreboard extends uvm_scoreboard;
         if(packet_3.inp_valid == 3) begin
            t_mul  = ( packet_3.opa + 1 ) * ( packet_3.opb + 1 );  
            ref_res =  t_mul;
-           $display( "ref_res = %0d ", ref_res);
+         //  $display( "ref_res = %0d ", ref_res);
          end
         else ref_err = 1;
         end
@@ -223,7 +223,7 @@ class alu_scoreboard extends uvm_scoreboard;
          if(packet_3.inp_valid == 3) begin
            bit [`DATA_WIDTH - 1:0] temp = ( packet_3.opa << 1 ); 
            t_mul  = ( temp ) * ( packet_3.opb );
-		   ref_res =  t_mul;
+		       ref_res =  t_mul;
          end
          else ref_err = 1;
          end

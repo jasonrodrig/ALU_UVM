@@ -20,7 +20,7 @@ class alu_test extends uvm_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq.start(alu_env.alu_agt.alu_seqr);
+		seq.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -41,10 +41,11 @@ class rst_ce_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq0.start(alu_env.alu_agt.alu_seqr);
+		seq0.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
+
 
 class single_operand_arithmatic_test extends alu_test;
 
@@ -62,7 +63,7 @@ class single_operand_arithmatic_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq1.start(alu_env.alu_agt.alu_seqr);
+		seq1.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -83,7 +84,7 @@ class single_operand_logical_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq2.start(alu_env.alu_agt.alu_seqr);
+		seq2.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -104,7 +105,7 @@ class two_operand_arithmatic_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq3.start(alu_env.alu_agt.alu_seqr);
+		seq3.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -125,7 +126,7 @@ class two_operand_logical_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq4.start(alu_env.alu_agt.alu_seqr);
+		seq4.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -144,7 +145,7 @@ class single_operand_arithmatic_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq5.start(alu_env.alu_agt.alu_seqr);
+		seq5.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -165,7 +166,7 @@ class single_operand_logical_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq6.start(alu_env.alu_agt.alu_seqr);
+		seq6.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -186,7 +187,7 @@ class two_operand_arithmatic_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq7.start(alu_env.alu_agt.alu_seqr);
+		seq7.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -207,7 +208,7 @@ class two_operand_logical_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq8.start(alu_env.alu_agt.alu_seqr);
+		seq8.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -228,7 +229,7 @@ class rotate_right_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq9.start(alu_env.alu_agt.alu_seqr);
+		seq9.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -249,7 +250,7 @@ class rotate_left_error_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq10.start(alu_env.alu_agt.alu_seqr);
+		seq10.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);  
 	endtask
 endclass
@@ -270,7 +271,7 @@ class cycle_16_arithmatic_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq11.start(alu_env.alu_agt.alu_seqr);
+		seq11.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -291,7 +292,7 @@ class cycle_16_logical_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq12.start(alu_env.alu_agt.alu_seqr);
+		seq12.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
@@ -313,7 +314,7 @@ class alu_regression_test extends alu_test;
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		reg_test.start(alu_env.alu_agt.alu_seqr);
+		reg_test.start(alu_env.alu_active_agt.alu_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass

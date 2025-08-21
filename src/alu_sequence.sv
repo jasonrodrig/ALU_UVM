@@ -27,15 +27,11 @@ class rst_ce extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-		repeat(`no_of_items) begin
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst dist{ 0:=4 , 1:=2};
-					req.ce  dist{ 1:=4 , 0:=2};
-				}
-			)
-		end
+//		repeat(`no_of_items) begin
+		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
+			`uvm_do_with(req,{req.mode == 1;req.rst == 0;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
+		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 1;req.cmd== 0;req.inp_valid == 3;})
+//		end
 	endtask
 endclass 
 
@@ -358,5 +354,5 @@ class alu_regression extends uvm_sequence#(alu_sequence_item);
 		`uvm_do(seq10)
 		`uvm_do(seq11)         
 		`uvm_do(seq12) 
-	endtask
+  endtask
 endclass

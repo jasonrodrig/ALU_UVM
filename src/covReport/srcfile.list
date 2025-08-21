@@ -1,4 +1,15 @@
+alu_agent.sv
 alu_assertions.sv
 alu_coverage.sv
+alu_design.sv
+alu_driver.sv
+alu_environment.sv
+alu_interface.sv
+alu_monitor.sv
 alu_package.sv
+alu_scoreboard.sv
+alu_sequence.sv
+alu_sequence_item.sv
+alu_sequencer.sv
+alu_test.sv
 alu_top.sv
