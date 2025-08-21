@@ -4,10 +4,10 @@ class alu_driver extends uvm_driver #(alu_sequence_item);
 
   `uvm_component_utils(alu_driver)
   
-  uvm_analysis_port#(alu_sequence_item) driv_port; 
+//  uvm_analysis_port#(alu_sequence_item) driv_port; 
   function new (string name = "alu_driver", uvm_component parent);
     super.new(name, parent);
-    driv_port = new("driv_port", this);
+//    driv_port = new("driv_port", this);
   endfunction : new
 
   function void build_phase(uvm_phase phase);
@@ -56,7 +56,7 @@ class alu_driver extends uvm_driver #(alu_sequence_item);
                           repeat(4) @(vif.alu_driver_cb);  
                        else
                           repeat(3)@(vif.alu_driver_cb);
-                       driv_port.write(req);
+                    //   driv_port.write(req);
                     end
                 end
              end
@@ -76,7 +76,7 @@ class alu_driver extends uvm_driver #(alu_sequence_item);
          	  repeat(3) @(vif.alu_driver_cb); 
         end
       $display("SENDING RESPONSE ");
-      driv_port.write(req);
+				// driv_port.write(req);
       seq_item_port.item_done();
       end
   endtask
