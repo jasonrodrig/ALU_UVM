@@ -1,0 +1,7 @@
+# ALU_VERIFICATION(UVM)
+
+## VERIFICATION REPORT LINK:
+[ALU VERIFICATION REPORT](https://docs.google.com/document/d/19RqQM63CaR-6J4BJ25v3Bdr9ep6UMgGB/edit?usp=sharing&ouid=113766502478178390742&rtpof=true&sd=true)
+
+## VERIFICATION PLANAR LINK:
+[ALU VERIFICATION PLANAR SHEET](https://docs.google.com/spreadsheets/d/1EryK2q-1XDE19L9bzLosvEQQzwqS2ouB/edit?usp=sharing&ouid=113766502478178390742&rtpof=true&sd=true)
