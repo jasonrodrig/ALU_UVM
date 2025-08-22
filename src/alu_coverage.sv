@@ -12,7 +12,7 @@ class alu_coverage extends uvm_component;
 
 	covergroup input_coverage;
 		option.per_instance = 1;
-		opa       : coverpoint active_mon.opa { bins opa = {[0:255]} with (item / 32 ); }
+		
 		opb       : coverpoint active_mon.opb { bins opb = {[0:255]} with (item / 32 ); }
 		cmd       : coverpoint active_mon.cmd { 
 		                         bins arithmatic_cmd[] = {[0:10]} iff (active_mon.mode == 1'b1);
