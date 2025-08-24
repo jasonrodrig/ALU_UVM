@@ -1,14 +1,26 @@
 class alu_sequence_item extends uvm_sequence_item;
-	rand logic rst;
-	rand logic ce, mode , cin;
+
+	//------------------------------------------------------//
+	//             randomized input signals                 //  
+	//------------------------------------------------------//
+	rand logic rst , ce , mode , cin;
 	rand logic [`DATA_WIDTH - 1:0] opa , opb;
 	rand logic [`CMD_WIDTH - 1:0] cmd;
 	rand logic [1:0] inp_valid;
-       logic [RESULT_WIDTH - 1 :0] res ;
-	     logic  err , oflow , cout , g , l , e;
+
+	//------------------------------------------------------//
+	//          non randomized output signals               //  
+	//------------------------------------------------------//
+
+	logic [RESULT_WIDTH - 1 :0] res ;
+	logic  err , oflow , cout , g , l , e;
+
+	//------------------------------------------------------//
+	//         registering input signals and output         //
+	//                signals to the factory                //  
+	//------------------------------------------------------//
 
 	`uvm_object_utils_begin(alu_sequence_item)
-
 	`uvm_field_int(rst,UVM_ALL_ON)
 	`uvm_field_int(ce,UVM_ALL_ON)
 	`uvm_field_int(mode,UVM_ALL_ON)
@@ -24,8 +36,11 @@ class alu_sequence_item extends uvm_sequence_item;
 	`uvm_field_int(g,UVM_ALL_ON)
 	`uvm_field_int(l,UVM_ALL_ON)
 	`uvm_field_int(e,UVM_ALL_ON)
-
 	`uvm_object_utils_end
+
+	//------------------------------------------------------//
+	//   Creating a new constructor for alu_sequence_item   //  
+	//------------------------------------------------------//
 
 	function new(string name = "alu_sequence_item");
 		super.new(name);

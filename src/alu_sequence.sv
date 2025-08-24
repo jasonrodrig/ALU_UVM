@@ -1,11 +1,23 @@
-
-
 class alu_sequence extends uvm_sequence#(alu_sequence_item);
 
+	//------------------------------------------------------//
+	//    registering alu_sequence object to the factory    //  
+	//------------------------------------------------------//
+
 	`uvm_object_utils(alu_sequence)
+
+	//------------------------------------------------------//
+	//    Creating a new constructor for alu_sequence       //  
+	//------------------------------------------------------//
+
 	function new(string name = "alu_sequence");
 		super.new(name);
 	endfunction
+
+	//------------------------------------------------------//
+	//  Task to generate, randomize, and send ALU sequence  //
+	//         items repeatedly until completion            //  
+	//------------------------------------------------------//
 
 	task body();
 		repeat(`no_of_items)begin
@@ -14,10 +26,13 @@ class alu_sequence extends uvm_sequence#(alu_sequence_item);
 			void'(req.randomize());
 			send_request(req);
 			wait_for_item_done();
-			$display("unblocked");
 		end
 	endtask
 endclass
+
+//------------------------------------------------------//
+//         reset and clock enable sequence              //  
+//------------------------------------------------------//
 
 class rst_ce extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(rst_ce)
@@ -27,13 +42,15 @@ class rst_ce extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-//		repeat(`no_of_items) begin
-		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
-			`uvm_do_with(req,{req.mode == 0;req.rst == 0;req.ce == 0;req.cmd== 0;req.inp_valid == 3;})
-		  `uvm_do_with(req,{req.mode == 1;req.rst == 1;req.ce == 1;req.cmd== 0;req.inp_valid == 3;})
-//		end
+		`uvm_do_with(req,{ req.rst == 1; req.ce == 0; })
+		`uvm_do_with(req,{ req.rst == 0; req.ce == 0; })
+		`uvm_do_with(req,{ req.rst == 1; req.ce == 1; })
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//         single operand arithmatic sequence           //  
+//------------------------------------------------------//
 
 class single_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(single_operand_arithmatic)
@@ -58,6 +75,10 @@ class single_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//         single operand logical sequence              //  
+//------------------------------------------------------//
+
 class single_operand_logical extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(single_operand_logical)
 
@@ -80,6 +101,10 @@ class single_operand_logical extends uvm_sequence#(alu_sequence_item);
 		end
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//         two operand arithmatic sequence              //  
+//------------------------------------------------------//
 
 class two_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(two_operand_arithmatic)
@@ -104,6 +129,10 @@ class two_operand_arithmatic extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//            two operand logical sequence              //  
+//------------------------------------------------------//
+
 class two_operand_logical extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(two_operand_logical)
 
@@ -126,6 +155,10 @@ class two_operand_logical extends uvm_sequence#(alu_sequence_item);
 		end
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//      single operand arithmatic error sequence        //  
+//------------------------------------------------------//
 
 class single_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(single_operand_arithmatic_error)
@@ -150,6 +183,10 @@ class single_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//      single operand logical error sequence           //  
+//------------------------------------------------------//
+
 class single_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(single_operand_logical_error)
 
@@ -173,6 +210,10 @@ class single_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//      two operand arithmatic error sequence           //  
+//------------------------------------------------------//
+
 class two_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(two_operand_arithmatic_error)
 
@@ -194,7 +235,11 @@ class two_operand_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 			)
 		end
 	endtask
-endclass 
+endclass
+
+//------------------------------------------------------//
+//       two operand logical error sequence             //  
+//------------------------------------------------------//
 
 class two_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(two_operand_logical_error)
@@ -217,7 +262,11 @@ class two_operand_logical_error extends uvm_sequence#(alu_sequence_item);
 			)
 		end
 	endtask
-endclass 
+endclass
+
+//------------------------------------------------------//
+//            rotate right error sequence               //  
+//------------------------------------------------------//
 
 class rotate_right_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(rotate_right_error)
@@ -244,6 +293,10 @@ class rotate_right_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//            rotate left error sequence                //  
+//------------------------------------------------------//
+
 class rotate_left_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(rotate_left_error)
 
@@ -269,6 +322,10 @@ class rotate_left_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//         16 clock cycle arithmatic sequence           //  
+//------------------------------------------------------//
+
 class cycle_16_arithmatic extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(cycle_16_arithmatic)
 
@@ -291,6 +348,10 @@ class cycle_16_arithmatic extends uvm_sequence#(alu_sequence_item);
 		end
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//         16 clock cycle logical sequence              //  
+//------------------------------------------------------//
 
 class cycle_16_logical extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(cycle_16_logical)
@@ -315,6 +376,11 @@ class cycle_16_logical extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//           comparsion for opa > opb, opa < opb        //
+//                  and opa = opb sequence              //  
+//------------------------------------------------------//
+
 class comparison extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(comparison)
 
@@ -334,7 +400,7 @@ class comparison extends uvm_sequence#(alu_sequence_item);
 					req.cmd == 8;
 					req.opa == req.opb;
 				}
-		  )
+			)
 			`uvm_do_with( 
 				req,
 				{ 
@@ -345,8 +411,8 @@ class comparison extends uvm_sequence#(alu_sequence_item);
 					req.cmd == 8;
 					req.opa > req.opb;
 				}
-		  )
-    	`uvm_do_with( 
+			)
+			`uvm_do_with( 
 				req,
 				{ 
 					req.rst == 0;
@@ -356,10 +422,15 @@ class comparison extends uvm_sequence#(alu_sequence_item);
 					req.cmd == 8;
 					req.opa < req.opb;
 				}
-		  )
+			)
 		end
 	endtask
 endclass 
+
+
+//------------------------------------------------------//
+// invlaid cmd check for arithmatic and logical sequence//  
+//------------------------------------------------------//
 
 class invalid_cmd extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(invalid_cmd)
@@ -369,28 +440,32 @@ class invalid_cmd extends uvm_sequence#(alu_sequence_item);
 	endfunction
 
 	task body();
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 1;
-					req.inp_valid == 3;
-					req.cmd == 15;
-				}
-			)
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 0;
-					req.inp_valid == 3;
-					req.cmd == 15;
-				}
-			)		
+		`uvm_do_with( 
+			req,
+			{ 
+				req.rst == 0;
+				req.ce == 1;
+				req.mode == 1;
+				req.inp_valid == 3;
+				req.cmd == 15;
+			}
+		)
+		`uvm_do_with( 
+			req,
+			{ 
+				req.rst == 0;
+				req.ce == 1;
+				req.mode == 0;
+				req.inp_valid == 3;
+				req.cmd == 15;
+			}
+		)		
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//      16 clock cycle arithmatic error sequence        //  
+//------------------------------------------------------//
 
 class cycle_16_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(cycle_16_arithmatic_error)
@@ -415,6 +490,10 @@ class cycle_16_arithmatic_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//         16 clock cycle logical error sequence        //  
+//------------------------------------------------------//
+
 class cycle_16_logical_error extends uvm_sequence#(alu_sequence_item);
 	`uvm_object_utils(cycle_16_logical_error)
 
@@ -438,11 +517,14 @@ class cycle_16_logical_error extends uvm_sequence#(alu_sequence_item);
 	endtask
 endclass 
 
+//------------------------------------------------------//
+//   alu regression sequence for all 17 sequence test   //  
+//------------------------------------------------------//
+
 class alu_regression extends uvm_sequence#(alu_sequence_item);
-
 	`uvm_object_utils(alu_regression)
-	rst_ce seq0;
 
+	rst_ce                    seq0;
 	single_operand_arithmatic seq1;
 	single_operand_logical    seq2;
 	two_operand_arithmatic    seq3;
@@ -455,16 +537,14 @@ class alu_regression extends uvm_sequence#(alu_sequence_item);
 
 	rotate_right_error  seq9;
 	rotate_left_error   seq10;
-
 	cycle_16_arithmatic seq11;
 	cycle_16_logical    seq12;
 
-  comparison seq13;
-  invalid_cmd seq14;
-
+	comparison                seq13;
+	invalid_cmd               seq14;
 	cycle_16_arithmatic_error seq15;
 	cycle_16_logical_error    seq16;
-	
+
 	function new(string name = "alu_regression");
 		super.new(name);
 	endfunction
@@ -487,5 +567,5 @@ class alu_regression extends uvm_sequence#(alu_sequence_item);
 		`uvm_do(seq14)
 		`uvm_do(seq15)
 		`uvm_do(seq16)
-  endtask
+	endtask
 endclass

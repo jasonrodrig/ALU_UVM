@@ -1,12 +1,24 @@
 class alu_test extends uvm_test;
 
+	// registering alu_test with the fatcory
 	`uvm_component_utils(alu_test)
+
+	// handle declaration for alu_environment and alu_test
 	alu_environment alu_env;
 	alu_sequence seq;
+
+	//------------------------------------------------------//
+	//    Creating a new constructor for alu_test           //  
+	//------------------------------------------------------//
 
 	function new(string name = "alu_test", uvm_component parent);
 		super.new(name,parent);
 	endfunction : new
+
+	//------------------------------------------------------//
+	//         building components for alu_environment      //
+	//         and object for alu_sequence                  //  
+	//------------------------------------------------------//
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
@@ -14,9 +26,17 @@ class alu_test extends uvm_test;
 		seq = alu_sequence::type_id::create("alu_seq");
 	endfunction : build_phase
 
+	//------------------------------------------------------//
+	//       Printing the ALU architecture toptoplogy       //  
+	//------------------------------------------------------//
+
 	function void end_of_elaboration();
 		uvm_top.print_topology();
 	endfunction
+
+	//------------------------------------------------------//
+	//             running the test sequence                //  
+	//------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
@@ -24,6 +44,10 @@ class alu_test extends uvm_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//         reset and clock enable test                  //  
+//------------------------------------------------------//
 
 class rst_ce_test extends alu_test;
 
@@ -46,6 +70,9 @@ class rst_ce_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//         single operand arithmatic test               //  
+//------------------------------------------------------//
 
 class single_operand_arithmatic_test extends alu_test;
 
@@ -68,6 +95,10 @@ class single_operand_arithmatic_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//         single operand logical test                  //  
+//------------------------------------------------------//
+
 class single_operand_logical_test extends alu_test;
 
 	`uvm_component_utils( single_operand_logical_test)
@@ -88,6 +119,10 @@ class single_operand_logical_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//         two operand arithmatic test                  //  
+//------------------------------------------------------//
 
 class two_operand_arithmatic_test extends alu_test;
 
@@ -110,6 +145,10 @@ class two_operand_arithmatic_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//            two operand logical test                  //  
+//------------------------------------------------------//
+
 class two_operand_logical_test extends alu_test;
 
 	`uvm_component_utils( two_operand_logical_test)
@@ -131,6 +170,10 @@ class two_operand_logical_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//      single operand arithmatic error test            //  
+//------------------------------------------------------//
+
 class single_operand_arithmatic_error_test extends alu_test;
 	`uvm_component_utils( single_operand_arithmatic_error_test)
 	single_operand_arithmatic_error seq5;
@@ -149,6 +192,10 @@ class single_operand_arithmatic_error_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//      single operand logical error test               //  
+//------------------------------------------------------//
 
 class single_operand_logical_error_test extends alu_test;
 
@@ -171,6 +218,10 @@ class single_operand_logical_error_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//      two operand arithmatic error test               //  
+//------------------------------------------------------//
+
 class two_operand_arithmatic_error_test extends alu_test;
 
 	`uvm_component_utils( two_operand_arithmatic_error_test)
@@ -191,6 +242,10 @@ class two_operand_arithmatic_error_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//       two operand logical error test                 //  
+//------------------------------------------------------//
 
 class two_operand_logical_error_test extends alu_test;
 
@@ -213,6 +268,10 @@ class two_operand_logical_error_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//            rotate right error test                   //  
+//------------------------------------------------------//
+
 class rotate_right_error_test extends alu_test;
 
 	`uvm_component_utils( rotate_right_error_test)
@@ -233,6 +292,10 @@ class rotate_right_error_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//            rotate left error test                    //  
+//------------------------------------------------------//
 
 class rotate_left_error_test extends alu_test;
 
@@ -255,6 +318,10 @@ class rotate_left_error_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//         16 clock cycle arithmatic test               //  
+//------------------------------------------------------//
+
 class cycle_16_arithmatic_test extends alu_test;
 
 	`uvm_component_utils( cycle_16_arithmatic_test)
@@ -275,6 +342,10 @@ class cycle_16_arithmatic_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//         16 clock cycle logical test                  //  
+//------------------------------------------------------//
 
 class cycle_16_logical_test extends alu_test;
 
@@ -297,10 +368,15 @@ class cycle_16_logical_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//           comparsion test for opa > opb,             //
+//             opa < opb and opa = opb                  //  
+//------------------------------------------------------//
+
 class comparison_test extends alu_test;
 
 	`uvm_component_utils( comparison_test)
-	 comparison seq13;
+	comparison seq13;
 
 	function new(string name = "comparison_test", uvm_component parent);
 		super.new(name,parent);
@@ -318,10 +394,14 @@ class comparison_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+// invlaid cmd test for arithmatic and logical operation//  
+//------------------------------------------------------//
+
 class invalid_cmd_test extends alu_test;
 
 	`uvm_component_utils( invalid_cmd_test)
-	 invalid_cmd seq14;
+	invalid_cmd seq14;
 
 	function new(string name = "invalid_cmd_test", uvm_component parent);
 		super.new(name,parent);
@@ -338,6 +418,10 @@ class invalid_cmd_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//      16 clock cycle arithmatic error test            //  
+//------------------------------------------------------//
 
 class cycle_16_arithmatic_error_test extends alu_test;
 
@@ -360,6 +444,10 @@ class cycle_16_arithmatic_error_test extends alu_test;
 	endtask
 endclass
 
+//------------------------------------------------------//
+//         16 clock cycle logical error test            //  
+//------------------------------------------------------//
+
 class cycle_16_logical_error_test extends alu_test;
 
 	`uvm_component_utils( cycle_16_logical_error_test)
@@ -380,6 +468,10 @@ class cycle_16_logical_error_test extends alu_test;
 		phase.drop_objection(this);
 	endtask
 endclass
+
+//------------------------------------------------------//
+//           alu regression sequence test               //  
+//------------------------------------------------------//
 
 class alu_regression_test extends alu_test;
 
