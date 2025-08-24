@@ -1,7 +1,0 @@
-var g_db_data = [
-{dummy:0},
-{name:'input_coverage',f:1,type:6,id:1191,tb:'73',h:'72',m:'1',hp:'98.63%',cov:['97.72%','G'],g:'100.00%',gp:['97.72%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/alu_pkg/alu_coverage',parent:'1186'},
-{name:'output_coverage',f:1,type:6,id:1215,tb:'13',h:'10',m:'3',hp:'76.92%',cov:['78.57%','Y'],g:'100.00%',gp:['78.57%','Y'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/alu_pkg/alu_coverage',parent:'1186'},
-{name:'input_coverage',f:1,type:6,id:2111,tb:'73',h:'72',m:'1',hp:'98.63%',cov:['97.72%','G'],g:'100.00%',gp:['97.72%','G'],opts:[[],['merge_instance','true']],hdlPath:'work.alu_pkg::alu_coverage',parent:'2106'},
-{name:'output_coverage',f:1,type:6,id:2135,tb:'13',h:'10',m:'3',hp:'76.92%',cov:['78.57%','Y'],g:'100.00%',gp:['78.57%','Y'],opts:[[],['merge_instance','true']],hdlPath:'work.alu_pkg::alu_coverage',parent:'2106'}];
-processConsCovergroupsData(g_db_data);
