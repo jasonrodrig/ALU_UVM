@@ -2,6 +2,9 @@
 <img width="1024" height="720" alt="image" src="https://github.com/user-attachments/assets/b4cd8357-cf65-41e2-98ae-d1fcf579a9f7" />
 
 # ALU Verification Project (UVM)
+[![Language](https://img.shields.io/badge/Language-SystemVerilog-blue.svg)](https://en.wikipedia.org/wiki/SystemVerilog)  
+[![Methodology](https://img.shields.io/badge/Methodology-UVM-green.svg)](https://en.wikipedia.org/wiki/Universal_Verification_Methodology)  
+[![Simulation Tool](https://img.shields.io/badge/Tool-QuestaSIM-orange.svg)](https://eda.sw.siemens.com/en-US/ic/questa/)  
 
 ## 📌 Project Overview
 An **Arithmetic Logic Unit (ALU)** is a digital circuit that performs arithmetic and logical operations.  
